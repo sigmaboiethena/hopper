@@ -492,7 +492,9 @@ local function scanModel(m)
     local bestMPS = nil
     local bestName, bestScore = nil, -1
     for _, podium in ipairs(animalPodiums:GetChildren()) do
-        local gui = podium:WaitForChild("Base", 3):WaitForChild("Spawn", 3):WaitForChild("Attachment", 3):FindFirstChildOfClass("BillboardGui", 3)
+        local attachment = podium:WaitForChild("Base", 3):WaitForChild("Spawn", 3):WaitForChild("Attachment", 3)
+        if not attachment then continue end
+        local gui = attachment:FindFirstChildOfClass("BillboardGui", 3)
         if not gui then continue end
         print('found gui')
         if gui:IsA("BillboardGui") then
