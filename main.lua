@@ -531,7 +531,7 @@ local function scanModel(m)
     if (bestName == nil or bestName == "") then
         bestName = m.Name
     end
-    if #(all > 1) then
+    if (#all > 1) then
         table.sort(all, function(a, b) return a.money > b.money end)
     end
     return bestName, bestMPS, owner, all
