@@ -667,7 +667,7 @@ task.spawn(function()
 
         task.wait(0.05)
         task.wait(1000)
-        local name, mps, owner, all = scanModel(obj)
+        -- local name, mps, owner, all = scanModel(obj)
         if not mps then return end
 
         if mps > 0 then
@@ -749,6 +749,7 @@ task.spawn(function()
         local bestModel, bestName, bestMPS, bestowner, bestall = nil, nil, -1, nil, nil
 
         for _, m in ipairs(workspace:WaitForChild("Plots"):GetChildren()) do
+            print('PLOT: ', m.Name)
             local nm, mps, owner, all = scanModel(m)
             if mps then
                 if mps > bestMPS then
