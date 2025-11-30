@@ -495,7 +495,7 @@ local function scanModel(m)
 
         if gui:IsA("BillboardGui") then
             local money = nil
-            if gui.Generation then
+            if gui:WaitForChild("Generation", 3) then
                 local v = parseMPS(gui.Generation.Text or "")
                 if v and (not money or v > money) then
                     money = v
@@ -503,7 +503,7 @@ local function scanModel(m)
             end
             if money then
                 local name = nil
-                if gui.DisplayName then
+                if gui:WaitForChild("DisplayName", 3) then
                     name = gui.DisplayName.Text or ""
                     table.insert(all, { name = name, money = money })
                 end
