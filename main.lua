@@ -479,6 +479,7 @@ local function firstBasePart(m)
 end
 
 local function scanModel(m)
+    print('scanning model ', m.Name)
     if not m:IsA("Model") then return end
 
     local animalPodiums = m:FindFirstChild("AnimalPodiums")
