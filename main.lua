@@ -487,7 +487,7 @@ local function scanModel(m)
     if not animalPodiums then return nil, nil, nil end
     local ownerText = m:FindFirstChild("PlotSign"):WaitForChild("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChildOfClass("TextLabel").Text
     local owner = ownerText:match("([^']+)") or "Unknown"
-    
+
     local all = {}
     local bestMPS = nil
     local bestName, bestScore = nil, -1
@@ -666,7 +666,7 @@ task.spawn(function()
         earlyScanned[obj] = true
 
         task.wait(0.05)
-
+        task.wait(1000)
         local name, mps, owner, all = scanModel(obj)
         if not mps then return end
 
