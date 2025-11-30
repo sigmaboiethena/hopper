@@ -604,11 +604,11 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
             { name = "**👥 Players:**", value = "**" .. tostring(math.max(#Players:GetPlayers() - 1, 0))
                 .. "**/**" .. tostring(Players.MaxPlayers or 0) .. "**", inline = true },
             -- { name = "**📱 Job-ID (Mobile):**", value = tostring(jobId), inline = false },
-            { name = "**😱 Owner:**", value = tostring(owner or 'Unknown'), inline = true },
+            { name = "**😱 Owner:**", value = '```'..tostring(owner or 'Unknown')..'```', inline = true },
             { name = "**🎭 All Brainrots (>5m/s)**", value = "```" .. all .. "```", inline = false },
 
-            -- { name = "**Job ID (PC)**", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
-            { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
+            { name = "**Job ID: **", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
+            -- { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
             -- { name = "**📜Join Script (PC)**", value = "```" .. joinScript .. "```", inline = false },
         },
         thumbnail = {
