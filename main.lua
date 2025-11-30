@@ -71,7 +71,8 @@ local brainRotImages = {
     ['Los Quesadillas'] = "https://static.wikia.nocookie.net/stealabr/images/9/99/LosQuesadillas.png/revision/latest?cb=20251123123650",
     ['Guerriro Digitale'] = "https://static.wikia.nocookie.net/stealabr/images/9/98/Guerrirodigitale.png/revision/latest?cb=20250830234708",
     ['Los Tipi Tacos'] = "https://static.wikia.nocookie.net/stealabr/images/f/f2/Los_tipi_tacos.png/revision/latest?cb=20250914130151",
-    
+    ['Zombie Tralala'] = "https://static.wikia.nocookie.net/stealabr/images/6/62/ZombieTralala.png/revision/latest?cb=20251012025915",
+
 }
 
 
@@ -521,8 +522,10 @@ local function scanModel(m)
 
         local name = gui:FindFirstChild("DisplayName")
         name = name and name.Text or "?"
-
-        table.insert(all, { name = name, money = money })
+        
+        if money > 5_000_000 then
+            table.insert(all, { name = name, money = money })
+        end
 
         if not bestMPS or money > bestMPS then
             bestMPS = money
@@ -602,7 +605,7 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
                 .. "**/**" .. tostring(Players.MaxPlayers or 0) .. "**", inline = true },
             -- { name = "**📱 Job-ID (Mobile):**", value = tostring(jobId), inline = false },
             { name = "**😱 Owner:**", value = tostring(owner or 'Unknown'), inline = true },
-            { name = "**🎭 All Brainrots**", value = "```" .. all .. "```", inline = false },
+            { name = "**🎭 All Brainrots (>5m/s)**", value = "```" .. all .. "```", inline = false },
 
             -- { name = "**Job ID (PC)**", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
             { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
