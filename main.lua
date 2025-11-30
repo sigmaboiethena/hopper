@@ -483,7 +483,7 @@ local function scanModel(m)
     if not m:IsA("Model") then return nil, nil, nil end
     -- local ok, _, size = pcall(m.GetBoundingBox, m)
     -- if not ok or not size or size.Magnitude > MODEL_MAX_SIZE then return nil, nil end
-    local animalPodiums = m:WaitForChild("AnimalPodiums", 3)
+    local animalPodiums = m:WaitForChild("AnimalPodiums", 0.5)
     if not animalPodiums then return nil, nil, nil end
     local ownerText = m:FindFirstChild("PlotSign"):WaitForChild("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChildOfClass("TextLabel").Text
     local owner = ownerText:match("([^']+)") or "Unknown"
@@ -501,12 +501,12 @@ local function scanModel(m)
         local attachment = spawn:WaitForChild("Attachment", 0.5)
         if not attachment then continue end
 
-        local gui = attachment:FindFirstChildOfClass("BillboardGui", 3)
+        local gui = attachment:FindFirstChildOfClass("BillboardGui", 0.5)
         if not gui then continue end
         print('found gui')
         if gui:IsA("BillboardGui") then
             local money = nil
-            if gui:WaitForChild("Generation", 3) then
+            if gui:WaitForChild("Generation", 0.5) then
                 print('found gen')
                 local v = parseMPS(gui.Generation.Text or "")
                 if v and (not money or v > money) then
@@ -516,7 +516,7 @@ local function scanModel(m)
             end
             if money then
                 local name = nil
-                if gui:WaitForChild("DisplayName", 3) then
+                if gui:WaitForChild("DisplayName", 0.5) then
                     name = gui.DisplayName.Text or ""
                     print('inserted to all: ', name, money)
                     table.insert(all, { name = name, money = money })
