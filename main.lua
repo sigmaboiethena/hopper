@@ -479,62 +479,62 @@ local function firstBasePart(m)
 end
 
 local function scanModel(m)
-    print('scanning model: ', m.Name)
-    if not m:IsA("Model") then return nil, nil, nil, nil end
-    -- local ok, _, size = pcall(m.GetBoundingBox, m)
-    -- if not ok or not size or size.Magnitude > MODEL_MAX_SIZE then return nil, nil end
-    local animalPodiums = m:WaitForChild("AnimalPodiums", 0.01)
-    if not animalPodiums then return nil, nil, nil, nil end
-    local ownerText = m:FindFirstChild("PlotSign"):WaitForChild("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChildOfClass("TextLabel").Text
-    local owner = ownerText:match("([^']+)") or "Unknown"
+    if not m:IsA("Model") then return end
+
+    local animalPodiums = m:FindFirstChild("AnimalPodiums")
+    if not animalPodiums then return end
+
+    local plotSign = m:FindFirstChild("PlotSign")
+    if not plotSign then return end
+
+    local surface = plotSign:FindFirstChild("SurfaceGui")
+    if not surface then return end
+
+    local frame = surface:FindFirstChildOfClass("Frame")
+    local label = frame and frame:FindFirstChildOfClass("TextLabel")
+    local owner = label and label.Text:match("([^']+)") or "Unknown"
 
     local all = {}
     local bestMPS = nil
-    local bestName, bestScore = nil, -1
+    local bestName = m.Name
+
     for _, podium in ipairs(animalPodiums:GetChildren()) do
-        local base = podium:WaitForChild("Base", 0.01)
+        local base = podium:FindFirstChild("Base")
         if not base then continue end
 
-        local spawn = base:WaitForChild("Spawn", 0.01)
+        local spawn = base:FindFirstChild("Spawn")
         if not spawn then continue end
 
-        local attachment = spawn:WaitForChild("Attachment", 0.01)
+        local attachment = spawn:FindFirstChild("Attachment")
         if not attachment then continue end
 
-        local gui = attachment:FindFirstChildOfClass("BillboardGui", 0.01)
+        local gui = attachment:FindFirstChildOfClass("BillboardGui")
         if not gui then continue end
-        print('found gui')
-        if gui:IsA("BillboardGui") then
-            local money = nil
-            if gui:WaitForChild("Generation", 0.01) then
-                print('found gen')
-                local v = parseMPS(gui.Generation.Text or "")
-                if v and (not money or v > money) then
-                    money = v
-                    print('parsed mps: ', money)
-                end
-            end
-            if money then
-                local name = nil
-                if gui:WaitForChild("DisplayName", 0.01) then
-                    name = gui.DisplayName.Text or ""
-                    print('inserted to all: ', name, money)
-                    table.insert(all, { name = name, money = money })
-                end
-                if (not bestMPS) or money > bestMPS then
-                    bestName = name
-                    bestMPS = money
-                    print('new best mps: ', bestMPS)
-                end
-            end
+
+        local gen = gui:FindFirstChild("Generation")
+        if not gen then continue end
+
+        local money = parseMPS(gen.Text or "")
+        if not money then continue end
+
+        local name = gui:FindFirstChild("DisplayName")
+        name = name and name.Text or "?"
+
+        table.insert(all, { name = name, money = money })
+
+        if not bestMPS or money > bestMPS then
+            bestMPS = money
+            bestName = name
         end
     end
-    if not bestMPS then return nil, nil, nil, nil end
-    if (#all > 1) then
+
+    if #all > 1 then
         table.sort(all, function(a, b) return a.money > b.money end)
     end
+
     return bestName, bestMPS, owner, all
 end
+
 
 -- =========================
 -- Флаг: был ли отправлен хоть один вебхук
