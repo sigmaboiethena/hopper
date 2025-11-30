@@ -522,15 +522,14 @@ local function scanModel(m)
                     table.insert(all, { name = name, money = money })
                 end
                 if (not bestMPS) or money > bestMPS then
+                    bestName = name
                     bestMPS = money
                     print('new best mps: ', bestMPS)
                 end
             end
         end
     end
-    if (bestName == nil or bestName == "") then
-        bestName = m.Name
-    end
+    if not bestMPS then return nil, nil, nil end
     if (#all > 1) then
         table.sort(all, function(a, b) return a.money > b.money end)
     end
