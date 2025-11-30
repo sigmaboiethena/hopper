@@ -303,6 +303,7 @@ function tryTeleportTo(jobId)
     jitter()
     print('ass')
     lastAttemptJobId = tostring(jobId)
+    task.wait(15)
     local ok = pcall(function()
         TeleportService:TeleportToPlaceInstance(game.PlaceId, lastAttemptJobId, LocalPlayer)
     end)
@@ -478,6 +479,7 @@ local function firstBasePart(m)
 end
 
 local function scanModel(m)
+    print('scanning model: ', m.Name)
     if not m:IsA("Model") then return nil, nil, nil end
     -- local ok, _, size = pcall(m.GetBoundingBox, m)
     -- if not ok or not size or size.Magnitude > MODEL_MAX_SIZE then return nil, nil end
@@ -485,30 +487,34 @@ local function scanModel(m)
     if not animalPodiums then return nil, nil, nil end
     local ownerText = m:FindFirstChild("PlotSign"):WaitForChild("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChildOfClass("TextLabel").Text
     local owner = ownerText:match("([^']+)") or "Unknown"
-
+    
     local all = {}
     local bestMPS = nil
     local bestName, bestScore = nil, -1
     for _, podium in ipairs(animalPodiums:GetChildren()) do
         local gui = podium:WaitForChild("Base"):WaitForChild("Spawn"):WaitForChild("Attachment"):FindFirstChildOfClass("BillboardGui")
         if not gui then continue end
-
+        print('found gui')
         if gui:IsA("BillboardGui") then
             local money = nil
             if gui:WaitForChild("Generation", 3) then
+                print('found gen')
                 local v = parseMPS(gui.Generation.Text or "")
                 if v and (not money or v > money) then
                     money = v
+                    print('parsed mps: ', money)
                 end
             end
             if money then
                 local name = nil
                 if gui:WaitForChild("DisplayName", 3) then
                     name = gui.DisplayName.Text or ""
+                    print('inserted to all: ', name, money)
                     table.insert(all, { name = name, money = money })
                 end
                 if (not bestMPS) or money > bestMPS then
                     bestMPS = money
+                    print('new best mps: ', bestMPS)
                 end
             end
         end
@@ -803,7 +809,7 @@ local function oneShotHop()
 
     -- ⏱ даём чуть-чуть времени, чтобы ранний сканер/лог успел отработать
     task.wait(math.random(45, 70) / 100) -- 0.45–0.70 сек
-
+    task.wait(15)
     pcall(function()
         TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, LocalPlayer)
     end)
