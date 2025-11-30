@@ -611,7 +611,7 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
             { name = "**😱 Owner:**", value = '```'..tostring(owner or 'Unknown')..'```', inline = true },
             { name = "**🎭 All Brainrots (>5m/s)**", value = "```" .. all .. "```", inline = false },
 
-            -- { name = "**Job ID: **", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
+            { name = "**Job ID: **", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
             -- { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
             { name = "**📜Join Script**", value = "```" .. joinScript .. "```", inline = false },
         },
