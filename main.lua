@@ -70,7 +70,8 @@ local brainRotImages = {
     ['Cuadramat and Pakrahmatmamat'] = "https://static.wikia.nocookie.net/stealabr/images/a/a3/Cuadramat.png/revision/latest?cb=20251126164937",
     ['Los Quesadillas'] = "https://static.wikia.nocookie.net/stealabr/images/9/99/LosQuesadillas.png/revision/latest?cb=20251123123650",
     ['Guerriro Digitale'] = "https://static.wikia.nocookie.net/stealabr/images/9/98/Guerrirodigitale.png/revision/latest?cb=20250830234708",
-
+    ['Los Tipi Tacos'] = "https://static.wikia.nocookie.net/stealabr/images/f/f2/Los_tipi_tacos.png/revision/latest?cb=20250914130151",
+    
 }
 
 
@@ -305,7 +306,7 @@ function tryTeleportTo(jobId)
     lastAttemptJobId = tostring(jobId)
     -- task.wait(15)
     local ok = pcall(function()
-        -- TeleportService:TeleportToPlaceInstance(game.PlaceId, lastAttemptJobId, LocalPlayer)
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, lastAttemptJobId, LocalPlayer)
     end)
     lastTeleportAt = os.clock()
     print('im not ok')
@@ -675,8 +676,8 @@ task.spawn(function()
         earlyScanned[obj] = true
 
         task.wait(0.05)
-        task.wait(1000)
-        -- local name, mps, owner, all = scanModel(obj)
+        -- task.wait(1000)
+        local name, mps, owner, all = scanModel(obj)
         if not mps then return end
 
         if mps > 0 then
@@ -821,7 +822,7 @@ local function oneShotHop()
     task.wait(math.random(45, 70) / 100) -- 0.45–0.70 сек
     -- task.wait(15)
     pcall(function()
-        -- TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, LocalPlayer)
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, LocalPlayer)
     end)
 end
 
