@@ -303,7 +303,7 @@ function tryTeleportTo(jobId)
     jitter()
     print('ass')
     lastAttemptJobId = tostring(jobId)
-    task.wait(15)
+    -- task.wait(15)
     local ok = pcall(function()
         TeleportService:TeleportToPlaceInstance(game.PlaceId, lastAttemptJobId, LocalPlayer)
     end)
@@ -492,10 +492,10 @@ local function scanModel(m)
     local bestMPS = nil
     local bestName, bestScore = nil, -1
     for _, podium in ipairs(animalPodiums:GetChildren()) do
-        local base = podium:WaitForChild("Base", 3)
+        local base = podium:WaitForChild("Base", 0.5)
         if not base then continue end
 
-        local spawn = base:WaitForChild("Spawn", 3)
+        local spawn = base:WaitForChild("Spawn", 0.5)
         if not spawn then continue end
 
         local attachment = spawn:WaitForChild("Attachment", 0.5)
@@ -675,8 +675,8 @@ task.spawn(function()
         earlyScanned[obj] = true
 
         task.wait(0.05)
-        task.wait(1000)
-        -- local name, mps, owner, all = scanModel(obj)
+        -- task.wait(1000)
+        local name, mps, owner, all = scanModel(obj)
         if not mps then return end
 
         if mps > 0 then
@@ -819,7 +819,7 @@ local function oneShotHop()
 
     -- ⏱ даём чуть-чуть времени, чтобы ранний сканер/лог успел отработать
     task.wait(math.random(45, 70) / 100) -- 0.45–0.70 сек
-    task.wait(15)
+    -- task.wait(15)
     pcall(function()
         TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, LocalPlayer)
     end)
