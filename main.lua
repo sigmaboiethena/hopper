@@ -12,6 +12,67 @@ local WEBHOOKS = {
     ['https://discord.com/api/webhooks/1442633978270978059/1W0Dxr21NtsNaFXf0LxHVdkpPTqgmsmmxI2txVR9NWFr8ZOp8YcPR4fuegwnq3IauQxC'] = {min = 100_000_000, max = math.huge, highlight = true}
 }
 
+local brainRotImages = {
+    ['default'] = "https://practicaltyping.com/wp-content/uploads/2020/07/gardenwallgreg.jpg",
+    ['Swag Soda'] = "https://static.wikia.nocookie.net/stealabr/images/9/9f/Swag_Soda.png/revision/latest?cb=20251116003702",
+    ['Mieteteira Bicicleteira'] = "https://static.wikia.nocookie.net/stealabr/images/6/6d/24_sin_t%C3%ADtulo_20251023155436.png/revision/latest?cb=20251125132431",
+    ['La Secret Combinasion'] = "https://static.wikia.nocookie.net/stealabr/images/f/f2/Lasecretcombinasion.png/revision/latest?cb=20251006044448",
+    ['67'] = "https://static.wikia.nocookie.net/stealabr/images/8/83/BOIIIIIII_SIX_SEVEN_%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82%F0%9F%98%82.png/revision/latest?cb=20251129064658",
+    ['Tang Tang Keletang'] = "https://static.wikia.nocookie.net/stealabr/images/8/8f/TangTang.png/revision/latest?cb=20251014024653",
+    ['Eviledon'] = "https://static.wikia.nocookie.net/stealabr/images/7/78/Eviledonn.png/revision/latest?cb=20251012023919",
+    ['Money Money Puggy'] = "https://static.wikia.nocookie.net/stealabr/images/0/09/Money_money_puggy.png/revision/latest?cb=20250928011934",
+    ['Gobblino Uniciclino'] = "https://static.wikia.nocookie.net/stealabr/images/c/c5/Gobblino_Uniciclino.png/revision/latest?cb=20251126164826",
+    ['Esok Sekolah'] = "https://static.wikia.nocookie.net/stealabr/images/2/2a/EsokSekolah2.png/revision/latest?cb=20250819001020",
+    ['La Grande Combinasion'] = "https://static.wikia.nocookie.net/stealabr/images/d/d8/Carti.png/revision/latest?cb=20250909171004",
+    ['Los Puggies'] = "https://static.wikia.nocookie.net/stealabr/images/c/c8/LosPuggies2.png/revision/latest?cb=20251109012744",
+    ['Los Combinasionas'] = "https://static.wikia.nocookie.net/stealabr/images/3/36/Stop_taking_my_chips_im_just_a_baybeh.png/revision/latest?cb=20250909223756",
+    ['Cooki and Milki'] = "https://static.wikia.nocookie.net/stealabr/images/9/9b/Cooki_and_milki.png/revision/latest?cb=20251106165517",
+    ['Strawberry Elephant'] = "https://static.wikia.nocookie.net/stealabr/images/5/58/Strawberryelephant.png/revision/latest?cb=20250830235735",
+    ['Dragon Cannelloni'] = "https://static.wikia.nocookie.net/stealabr/images/3/31/Nah_uh.png/revision/latest?cb=20250919124457",
+    ['Spaghetti Tualetti'] = "https://static.wikia.nocookie.net/stealabr/images/b/b8/Spaghettitualetti.png/revision/latest?cb=20251122142032",
+    ['Los Mobilis'] = "https://static.wikia.nocookie.net/stealabr/images/2/27/Losmobil.png/revision/latest?cb=20251012023251",
+    ['Burguro And Fryuro'] = "https://static.wikia.nocookie.net/stealabr/images/6/65/Burguro-And-Fryuro.png/revision/latest?cb=20251007133840",
+    ['Garama and Madundung'] = "https://static.wikia.nocookie.net/stealabr/images/e/ee/Garamadundung.png/revision/latest?cb=20250816022557",
+    ['Nuclearo Dinossauro'] = "https://static.wikia.nocookie.net/stealabr/images/9/99/THERE_ARE_BUGS_UNDER_YOUR_SKIN.png/revision/latest?cb=20250902180735",
+    ['Los Burritos'] = "https://static.wikia.nocookie.net/stealabr/images/9/97/LosBurritos.png/revision/latest?cb=20251123123907",
+    ['Orcaledon'] = "https://static.wikia.nocookie.net/stealabr/images/a/a6/Orcaledon.png/revision/latest?cb=20251119170121",
+    ['La Taco Combinasion'] = "https://static.wikia.nocookie.net/stealabr/images/8/84/Latacocombi.png/revision/latest?cb=20251030015001",
+    ['Los Bros'] = "https://static.wikia.nocookie.net/stealabr/images/5/53/BROOOOOOOO.png/revision/latest?cb=20250909152032",
+    ['Ketchuru and Musturu'] = "https://static.wikia.nocookie.net/stealabr/images/1/14/Ketchuru.png/revision/latest?cb=20251021163857",
+    ['La Spooky Grande'] = "https://static.wikia.nocookie.net/stealabr/images/5/51/Spooky_Grande.png/revision/latest?cb=20251012022949",
+    ['Los Spaghettis'] = "https://static.wikia.nocookie.net/stealabr/images/d/db/LosSpaghettis.png/revision/latest?cb=20251109012155",
+    ['Los Spooky Combinasionas'] = "https://static.wikia.nocookie.net/stealabr/images/8/8a/Lospookycombi.png/revision/latest?cb=20251030015823",
+    ['W or L'] = "https://static.wikia.nocookie.net/stealabr/images/2/28/Win_Or_Lose.png/revision/latest?cb=20251123084507",
+    ['Tralaledon'] = "https://static.wikia.nocookie.net/stealabr/images/7/79/Brr_Brr_Patapem.png/revision/latest?cb=20250909171639",
+    ['Tictac Sahur'] = "https://static.wikia.nocookie.net/stealabr/images/6/6f/Time_moving_slow.png/revision/latest?cb=20251103171934",
+    ['Los Primos'] = "https://static.wikia.nocookie.net/stealabr/images/9/96/LosPrimos.png/revision/latest?cb=20251006044831",
+    ['Lavadorito Spinito'] = "https://static.wikia.nocookie.net/stealabr/images/f/ff/Lavadorito_Spinito.png/revision/latest?cb=20251123122422",
+    ['Los Nooo My Hotspotsitos'] = "https://static.wikia.nocookie.net/stealabr/images/c/cb/LosNooMyHotspotsitos.png/revision/latest?cb=20250903124000",
+    ['Mariachi Corazoni'] = "https://static.wikia.nocookie.net/stealabr/images/5/5a/MariachiCora.png/revision/latest?cb=20251006211910",
+    ['La Extinct Grande'] = "https://static.wikia.nocookie.net/stealabr/images/c/cd/La_Extinct_Grande.png/revision/latest?cb=20250914041757",
+    ['Ketupat Kepat'] = "https://static.wikia.nocookie.net/stealabr/images/a/ac/KetupatKepat.png/revision/latest?cb=20251121154301",
+    ['Tacorita Bicicleta'] = "https://static.wikia.nocookie.net/stealabr/images/0/0f/Gonna_rob_you_twin.png/revision/latest?cb=20251006133721",
+    ['Los 67'] = "https://static.wikia.nocookie.net/stealabr/images/d/db/Los-67.png/revision/latest?cb=20251103171526",
+    ['Tang Tang Keletang'] = "https://static.wikia.nocookie.net/stealabr/images/8/8f/TangTang.png/revision/latest?cb=20251014024653",
+    ['Capitano Moby'] = "https://static.wikia.nocookie.net/stealabr/images/e/ef/Moby.png/revision/latest?cb=20251101185416",
+    -- 10m
+    ['Los Cucarachas'] = "https://static.wikia.nocookie.net/stealabr/images/a/ac/Los_Cucarachas_no_effect.png/revision/latest?cb=20251125124717",
+    ['To to to Sahur'] = "https://static.wikia.nocookie.net/stealabr/images/5/58/Africa_by_toto_%28to_sahur%29.png/revision/latest?cb=20250924041210",
+    ['Horegini Boom'] = "https://static.wikia.nocookie.net/stealabr/images/5/51/Hboom.png/revision/latest?cb=20251018135659",
+    ['Burrito Bandito'] = "https://static.wikia.nocookie.net/stealabr/images/e/e6/PoTaTo.png/revision/latest?cb=20251022160548",
+    ['Quesadilla Crocodila'] = "https://static.wikia.nocookie.net/stealabr/images/3/3f/QuesadillaCrocodilla.png/revision/latest?cb=20251006143118",
+    ['Tung Tung Tung Sahur'] = "https://static.wikia.nocookie.net/stealabr/images/0/05/TungTungSahur.png/revision/latest?cb=20251129214723",
+    ['Pot Hotspot'] = "https://static.wikia.nocookie.net/stealabr/images/4/4b/Pot_Hotspot.png/revision/latest?cb=20250915194349",
+    ['Los Jobcitos'] = "https://static.wikia.nocookie.net/stealabr/images/a/af/LosJobcitos.png/revision/latest?cb=20251006202121",
+    ['Graipuss Medussi'] = "https://static.wikia.nocookie.net/stealabr/images/b/b8/Graipuss.png/revision/latest?cb=20250816173622",
+    ['La Cucaracha'] = "https://static.wikia.nocookie.net/stealabr/images/4/46/La_Cucaracha.png/revision/latest?cb=20250920195538",
+    ['Pumpkini Spyderini'] = "https://static.wikia.nocookie.net/stealabr/images/d/da/Sammypumpkin.png/revision/latest?cb=20251030021310",
+    ['Cuadramat and Pakrahmatmamat'] = "https://static.wikia.nocookie.net/stealabr/images/a/a3/Cuadramat.png/revision/latest?cb=20251126164937",
+    ['Los Quesadillas'] = "https://static.wikia.nocookie.net/stealabr/images/9/99/LosQuesadillas.png/revision/latest?cb=20251123123650",
+    ['Guerriro Digitale'] = "https://static.wikia.nocookie.net/stealabr/images/9/98/Guerrirodigitale.png/revision/latest?cb=20250830234708",
+
+}
+
 
 -- Рефреш (было 0.40, сделал 0.30)
 local WEBHOOK_REFRESH = 0.30
@@ -417,30 +478,34 @@ local function firstBasePart(m)
 end
 
 local function scanModel(m)
-    if not m:IsA("Model") then return nil, nil end
-    local ok, _, size = pcall(m.GetBoundingBox, m)
-    if not ok or not size or size.Magnitude > MODEL_MAX_SIZE then return nil, nil end
+    if not m:IsA("Model") then return nil, nil, nil end
+    -- local ok, _, size = pcall(m.GetBoundingBox, m)
+    -- if not ok or not size or size.Magnitude > MODEL_MAX_SIZE then return nil, nil end
+    local animalPodiums = m:WaitForChild("AnimalPodiums", 3)
+    if not animalPodiums then return nil, nil, nil end
+    local ownerText = m:FindFirstChild("PlotSign"):WaitForChild("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChildOfClass("TextLabel").Text
+    local owner = ownerText:match("([^']+)") or "Unknown"
+
+    local all = {}
     local bestMPS = nil
     local bestName, bestScore = nil, -1
-    for _, gui in ipairs(m:GetDescendants()) do
+    for _, podium in ipairs(animalPodiums:GetChildren()) do
+        local gui = podium:WaitForChild("Base"):WaitForChild("Spawn"):WaitForChild("Attachment"):FindFirstChildOfClass("BillboardGui")
+        if not gui then continue end
+
         if gui:IsA("BillboardGui") then
             local money = nil
-            for _, t in ipairs(gui:GetDescendants()) do
-                if t:IsA("TextLabel") then
-                    local v = parseMPS(t.Text or "")
-                    if v and (not money or v > money) then
-                        money = v
-                    end
+            if gui.Generation then
+                local v = parseMPS(t.Generation.Text or "")
+                if v and (not money or v > money) then
+                    money = v
                 end
             end
             if money then
-                for _, t in ipairs(gui:GetDescendants()) do
-                    if t:IsA("TextLabel") then
-                        local sc, nm = scoreName(t.Text or "")
-                        if sc > bestScore then
-                            bestScore, bestName = sc, nm
-                        end
-                    end
+                local name = nil
+                if gui.DisplayName then
+                    name = gui.DisplayName.Text or ""
+                    table.insert(all, { name = name, money = money })
                 end
                 if (not bestMPS) or money > bestMPS then
                     bestMPS = money
@@ -451,7 +516,10 @@ local function scanModel(m)
     if (bestName == nil or bestName == "") then
         bestName = m.Name
     end
-    return bestName, bestMPS
+    if #(all > 1) then
+        table.sort(all, function(a, b) return a.money > b.money end)
+    end
+    return bestName, bestMPS, owner, all
 end
 
 -- =========================
@@ -488,7 +556,7 @@ end
 
 -- Вебхуки
 
-local function sendWebhook(name, mps, url, fields, color)
+local function sendWebhook(name, mps, url, fields, color, all, owner)
     if url == "" or not url then return end
 
     local placeId = game.PlaceId
@@ -506,7 +574,7 @@ local function sendWebhook(name, mps, url, fields, color)
         .. tostring(placeId) .. ',"' .. tostring(jobId) .. '",game.Players.LocalPlayer)'
 
     local formattedMps = shortMoney(mps)
-    local imageName = name:gsub("%s+", ""):lower()
+    local image = brainRotImages[tostring('name')] or brainRotImages["default"]
 
     local embed = {
         title = "🙉 Brainrot Notify",
@@ -517,14 +585,15 @@ local function sendWebhook(name, mps, url, fields, color)
             { name = "**👥 Players:**", value = "**" .. tostring(math.max(#Players:GetPlayers() - 1, 0))
                 .. "**/**" .. tostring(Players.MaxPlayers or 0) .. "**", inline = true },
             -- { name = "**📱 Job-ID (Mobile):**", value = tostring(jobId), inline = false },
+            { name = "**😱 Owner:**", value = tostring(owner or 'Unknown'), inline = true },
+            { name = "**🎭 All Brainrots**", value = "```" .. all .. "```", inline = false },
 
             { name = "**Job ID (PC)**", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
             { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
             { name = "**📜Join Script (PC)**", value = "```" .. joinScript .. "```", inline = false },
         },
         thumbnail = {
-            -- url = "https://static.wikia.nocookie.net/stealabr/images/0/02/" .. imageName:sub(1,1):upper() .. imageName:sub(2) .. ".png/revision/latest?cb=20251006140921"
-            url = "https://static.wikia.nocookie.net/stealabr/images/0/02/Dragoncanneloni.png/revision/latest?cb=20251006140921"
+            url = image
         }, 
         footer = { text = "Made by Ethena Team since 1987 • Today at " .. os.date("%H:%M") }
     }
@@ -532,9 +601,21 @@ local function sendWebhook(name, mps, url, fields, color)
     sendWebhookReliable(url, { embeds = { embed } })
 end
 
+local function formatEntry(entry)
+    return string.format("%s %s", entry.name, shortMoney(entry.money))
+end
+
+local function formatList(list)
+    local lines = {}
+    for _, entry in ipairs(list) do
+        table.insert(lines, formatEntry(entry))
+    end
+    return table.concat(lines, "\n")
+end
+
 local sentKeys = {}
 
-local function useNotify(name, mps)
+local function useNotify(name, mps, owner, all)
     local urls = {}
 
     local key = tostring(game.JobId) .. "|" .. tostring(name) .. "|" .. tostring(math.floor(mps or 0))
@@ -548,7 +629,8 @@ local function useNotify(name, mps)
             print('inserted url: ')
         end
     end
-    
+
+    local allBrainrots = formatList(all or {})
 
     for _, url in ipairs(urls) do
         local highlight = WEBHOOKS[url].highlight
@@ -561,7 +643,7 @@ local function useNotify(name, mps)
         local color = (highlight or mps >= 100_000_000) and 16766720 or nil
         print('sending webhook', name, mps, url, fields)
         task.spawn(function()
-            sendWebhook(name, mps, url, fields, color)
+            sendWebhook(name, mps, url, fields, color, allBrainrots, owner)
         end)
     end
 end
@@ -579,11 +661,11 @@ task.spawn(function()
 
         task.wait(0.05)
 
-        local name, mps = scanModel(obj)
+        local name, mps, owner, all = scanModel(obj)
         if not mps then return end
 
         if mps > 0 then
-            useNotify(name or obj.Name, mps)
+            useNotify(name or obj.Name, mps, owner, all)
         end
     end)
 end)
@@ -658,20 +740,19 @@ end)
 -- ==========================================================
 task.spawn(function()
     while true do
-        local bestModel, bestName, bestMPS = nil, nil, -1
-        local bestModelR2, bestNameR2, bestMPSR2 = nil, nil, -1
+        local bestModel, bestName, bestMPS, bestowner, bestall = nil, nil, -1, nil, nil
 
-        for _, m in ipairs(workspace:GetDescendants()) do
-            local nm, mps = scanModel(m)
+        for _, m in ipairs(workspace:WaitForChild("Plots")) do
+            local nm, mps, owner, all = scanModel(m)
             if mps then
                 if mps > bestMPS then
-                    bestMPS, bestModel, bestName = mps, m, nm
+                    bestMPS, bestModel, bestName, bestowner, bestall = mps, m, nm, owner, all
                 end
             end
         end
 
         if bestModel and bestMPS > 0 then
-            useNotify(bestName or bestModel.Name, bestMPS)
+            useNotify(bestName or bestModel.Name, bestMPS, bestowner, bestall)
         end
 
         task.wait(WEBHOOK_REFRESH)
