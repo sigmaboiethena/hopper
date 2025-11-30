@@ -480,11 +480,11 @@ end
 
 local function scanModel(m)
     print('scanning model: ', m.Name)
-    if not m:IsA("Model") then return nil, nil, nil end
+    if not m:IsA("Model") then return nil, nil, nil, nil end
     -- local ok, _, size = pcall(m.GetBoundingBox, m)
     -- if not ok or not size or size.Magnitude > MODEL_MAX_SIZE then return nil, nil end
-    local animalPodiums = m:WaitForChild("AnimalPodiums", 0.5)
-    if not animalPodiums then return nil, nil, nil end
+    local animalPodiums = m:WaitForChild("AnimalPodiums", 0.01)
+    if not animalPodiums then return nil, nil, nil, nil end
     local ownerText = m:FindFirstChild("PlotSign"):WaitForChild("SurfaceGui"):FindFirstChildOfClass("Frame"):FindFirstChildOfClass("TextLabel").Text
     local owner = ownerText:match("([^']+)") or "Unknown"
 
@@ -492,21 +492,21 @@ local function scanModel(m)
     local bestMPS = nil
     local bestName, bestScore = nil, -1
     for _, podium in ipairs(animalPodiums:GetChildren()) do
-        local base = podium:WaitForChild("Base", 0.5)
+        local base = podium:WaitForChild("Base", 0.01)
         if not base then continue end
 
-        local spawn = base:WaitForChild("Spawn", 0.5)
+        local spawn = base:WaitForChild("Spawn", 0.01)
         if not spawn then continue end
 
-        local attachment = spawn:WaitForChild("Attachment", 0.5)
+        local attachment = spawn:WaitForChild("Attachment", 0.01)
         if not attachment then continue end
 
-        local gui = attachment:FindFirstChildOfClass("BillboardGui", 0.5)
+        local gui = attachment:FindFirstChildOfClass("BillboardGui", 0.01)
         if not gui then continue end
         print('found gui')
         if gui:IsA("BillboardGui") then
             local money = nil
-            if gui:WaitForChild("Generation", 0.5) then
+            if gui:WaitForChild("Generation", 0.01) then
                 print('found gen')
                 local v = parseMPS(gui.Generation.Text or "")
                 if v and (not money or v > money) then
@@ -516,7 +516,7 @@ local function scanModel(m)
             end
             if money then
                 local name = nil
-                if gui:WaitForChild("DisplayName", 0.5) then
+                if gui:WaitForChild("DisplayName", 0.01) then
                     name = gui.DisplayName.Text or ""
                     print('inserted to all: ', name, money)
                     table.insert(all, { name = name, money = money })
@@ -529,7 +529,7 @@ local function scanModel(m)
             end
         end
     end
-    if not bestMPS then return nil, nil, nil end
+    if not bestMPS then return nil, nil, nil, nil end
     if (#all > 1) then
         table.sort(all, function(a, b) return a.money > b.money end)
     end
