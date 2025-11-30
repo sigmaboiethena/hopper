@@ -588,7 +588,7 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
         .. tostring(placeId) .. ',"' .. tostring(jobId) .. '",game.Players.LocalPlayer)'
 
     local formattedMps = shortMoney(mps)
-    local image = brainRotImages[tostring('name')] or brainRotImages["default"]
+    local image = brainRotImages[tostring(name)] or brainRotImages["default"]
 
     local embed = {
         title = "🙉 Brainrot Notify",
