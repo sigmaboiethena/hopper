@@ -72,7 +72,11 @@ local brainRotImages = {
     ['Guerriro Digitale'] = "https://static.wikia.nocookie.net/stealabr/images/9/98/Guerrirodigitale.png/revision/latest?cb=20250830234708",
     ['Los Tipi Tacos'] = "https://static.wikia.nocookie.net/stealabr/images/f/f2/Los_tipi_tacos.png/revision/latest?cb=20250914130151",
     ['Zombie Tralala'] = "https://static.wikia.nocookie.net/stealabr/images/6/62/ZombieTralala.png/revision/latest?cb=20251012025915",
-
+    ['Las Tralaleritas'] = "https://static.wikia.nocookie.net/stealabr/images/f/f4/LasTralaleritas.png/revision/latest?cb=20250817183119",
+    ['Fragrama and Chocrama'] = 'https://static.wikia.nocookie.net/stealabr/images/5/56/Fragrama.png/revision/latest?cb=20251109011733',
+    ['Los Tralaleritos'] = 'https://static.wikia.nocookie.net/stealabr/images/0/0f/Los_Tralaleritos.png/revision/latest?cb=20250816183135',
+    ['Chicleteira Bicicleteira'] = 'https://static.wikia.nocookie.net/stealabr/images/5/5a/Chicleteira.png/revision/latest?cb=20250921012655',
+    ['Job Job Job Sahur'] = 'https://static.wikia.nocookie.net/stealabr/images/0/03/Job.webp/revision/latest?cb=20250817162104',
 }
 
 
@@ -607,9 +611,9 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
             { name = "**😱 Owner:**", value = '```'..tostring(owner or 'Unknown')..'```', inline = true },
             { name = "**🎭 All Brainrots (>5m/s)**", value = "```" .. all .. "```", inline = false },
 
-            { name = "**Job ID: **", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
+            -- { name = "**Job ID: **", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
             -- { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
-            -- { name = "**📜Join Script (PC)**", value = "```" .. joinScript .. "```", inline = false },
+            { name = "**📜Join Script**", value = "```" .. joinScript .. "```", inline = false },
         },
         thumbnail = {
             url = image
