@@ -616,7 +616,7 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
 end
 
 local function formatEntry(entry)
-    return string.format("%s %s", entry.name, shortMoney(entry.money))
+    return string.format("%s | %s", entry.name, shortMoney(entry.money))
 end
 
 local function formatList(list)
