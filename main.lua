@@ -305,7 +305,7 @@ function tryTeleportTo(jobId)
     lastAttemptJobId = tostring(jobId)
     -- task.wait(15)
     local ok = pcall(function()
-        TeleportService:TeleportToPlaceInstance(game.PlaceId, lastAttemptJobId, LocalPlayer)
+        -- TeleportService:TeleportToPlaceInstance(game.PlaceId, lastAttemptJobId, LocalPlayer)
     end)
     lastTeleportAt = os.clock()
     print('im not ok')
@@ -602,9 +602,9 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
             { name = "**😱 Owner:**", value = tostring(owner or 'Unknown'), inline = true },
             { name = "**🎭 All Brainrots**", value = "```" .. all .. "```", inline = false },
 
-            { name = "**Job ID (PC)**", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
+            -- { name = "**Job ID (PC)**", value = "```" .. tostring(formattedJobId) .. "```", inline = false },
             { name = "**🌐Join Link**", value = "[**Click to Join**](" .. browserLink .. ")", inline = false },
-            { name = "**📜Join Script (PC)**", value = "```" .. joinScript .. "```", inline = false },
+            -- { name = "**📜Join Script (PC)**", value = "```" .. joinScript .. "```", inline = false },
         },
         thumbnail = {
             url = image
@@ -674,8 +674,8 @@ task.spawn(function()
         earlyScanned[obj] = true
 
         task.wait(0.05)
-        -- task.wait(1000)
-        local name, mps, owner, all = scanModel(obj)
+        task.wait(1000)
+        -- local name, mps, owner, all = scanModel(obj)
         if not mps then return end
 
         if mps > 0 then
@@ -705,7 +705,7 @@ local function rejoinViaBackend()
         task.wait(0.6 + 0.4 * tries)
     end
     pcall(function()
-        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+        -- TeleportService:Teleport(game.PlaceId, LocalPlayer)
     end)
     task.delay(10, function() rejoinBusy = false end)
     return false
@@ -820,7 +820,7 @@ local function oneShotHop()
     task.wait(math.random(45, 70) / 100) -- 0.45–0.70 сек
     -- task.wait(15)
     pcall(function()
-        TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, LocalPlayer)
+        -- TeleportService:TeleportToPlaceInstance(game.PlaceId, jobId, LocalPlayer)
     end)
 end
 
