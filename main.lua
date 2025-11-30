@@ -742,7 +742,7 @@ task.spawn(function()
     while true do
         local bestModel, bestName, bestMPS, bestowner, bestall = nil, nil, -1, nil, nil
 
-        for _, m in ipairs(workspace:WaitForChild("Plots")) do
+        for _, m in ipairs(workspace:WaitForChild("Plots"):GetChildren()) do
             local nm, mps, owner, all = scanModel(m)
             if mps then
                 if mps > bestMPS then
