@@ -496,7 +496,7 @@ local function scanModel(m)
         if gui:IsA("BillboardGui") then
             local money = nil
             if gui.Generation then
-                local v = parseMPS(t.Generation.Text or "")
+                local v = parseMPS(gui.Generation.Text or "")
                 if v and (not money or v > money) then
                     money = v
                 end
