@@ -448,7 +448,7 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
             url = image
         }, 
         -- footer = { text = "Made by Ethena Team since 1987 • Today at " .. os.date("%H:%M") }
-        footer = { text = "Ethena Notifier - v1.0" }
+        footer = { text = "Ethena Notifier - v1.0 ".. LocalPlayer.Name }
     }
 
     sendWebhookReliable(url, { embeds = { embed } })
@@ -540,71 +540,6 @@ local function brainrotGather()
         useNotify(bestName or bestModel.Name, bestMPS, bestowner, bestall)
     end
 end
-
--- ==========================================================
--- Rejoin with error
--- ==========================================================
-local rejoinBusy = false
-local function rejoinViaBackend()
-    if rejoinBusy then return end
-    rejoinBusy = true
-    local tries = 0
-    while tries < 6 do
-        local id = nextServer()
-        if id then
-            local ok = tryTeleportTo(id)
-            if ok then
-                task.delay(10, function() rejoinBusy = false end)
-                return true
-            end
-        end
-        tries = tries + 1
-        task.wait(0.6 + 0.4 * tries)
-    end
-    pcall(function()
-        TeleportService:Teleport(game.PlaceId, LocalPlayer)
-    end)
-    task.delay(10, function() rejoinBusy = false end)
-    return false
-end
-
-task.spawn(function()
-    while true do
-        local prompt = CoreGui:FindFirstChild("RobloxPromptGui")
-        if prompt then
-            local overlay = prompt:FindFirstChild("promptOverlay")
-            if overlay then
-                local ep = overlay:FindFirstChild("ErrorPrompt")
-                if ep and ep.Visible then
-                    local hasText = false
-                    pcall(function()
-                        local msg = tostring(
-                            ep.MessageArea
-                            and ep.MessageArea.ErrorFrame
-                            and ep.MessageArea.ErrorFrame.ErrorMessage
-                            and ep.MessageArea.ErrorFrame.ErrorMessage.Text
-                            or ""
-                        )
-                        if msg ~= "" then
-                            local lower = msg:lower()
-                            if lower:find("disconnect")
-                                or lower:find("reconnect")
-                                or lower:find("error code")
-                                or lower:find("279")
-                                or lower:find("277") then
-                                hasText = true
-                            end
-                        end
-                    end)
-                    if hasText then
-                        rejoinViaBackend()
-                    end
-                end
-            end
-        end
-        task.wait(1.3)
-    end
-end)
 
 -- ==========================================================
 -- First join hop
