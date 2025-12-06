@@ -10,7 +10,7 @@ local WEBHOOKS = {
     ['https://discord.com/api/webhooks/1442633978270978059/1W0Dxr21NtsNaFXf0LxHVdkpPTqgmsmmxI2txVR9NWFr8ZOp8YcPR4fuegwnq3IauQxC'] = {min = 100_000_000, max = math.huge, highlight = true}
 }
 
-local santahook = 'https://canary.discord.com/api/webhooks/1446962824730640619/JIZNi5QEMTIgYMwLCZLFb3g8SE3r0fV8z2QU9Ldp4TbB_Hs91T4wmlhayqpHc6k_G_jV'
+local santahook = 'https://canary.discord.com/api/webhooks/1446976102491885661/6TpKqs8a-U8vvGzIMRv5pXnt5DwMczuY7DGDs_L4o2NK4qw7_6doxvN14imdFQUHzRrq'
 
 local brainRotImages = {
     ['default'] = "https://practicaltyping.com/wp-content/uploads/2020/07/gardenwallgreg.jpg",
