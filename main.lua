@@ -485,7 +485,7 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
             url = image
         }, 
         -- footer = { text = "Made by Ethena Team since 1987 • Today at " .. os.date("%H:%M") }
-        footer = { text = "Ethena Notifier - v1.0 ".. LocalPlayer.Name }
+        footer = { text = "Ethena Notifier - v1.1 ".. LocalPlayer.Name }
     }
 
     sendWebhookReliable(url, { embeds = { embed } })
