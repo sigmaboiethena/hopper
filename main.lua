@@ -411,7 +411,7 @@ local function scanModel(m)
     for _, child in ipairs(m:GetChildren()) do
         local name = child.Name
         if name == 'Reindeer Tralala' or name == 'Santteo' or name == 'List List List Sahur' then
-            sendWebhook(name, 696700, santahook, nil, nil, {}, owner)
+            sendWebhook(name, 696700, santahook, nil, nil, '``````', owner)
             break
         end
     end
