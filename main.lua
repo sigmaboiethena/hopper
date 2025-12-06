@@ -10,8 +10,6 @@ local WEBHOOKS = {
     ['https://discord.com/api/webhooks/1442633978270978059/1W0Dxr21NtsNaFXf0LxHVdkpPTqgmsmmxI2txVR9NWFr8ZOp8YcPR4fuegwnq3IauQxC'] = {min = 100_000_000, max = math.huge, highlight = true}
 }
 
-local santahook = 'https://canary.discord.com/api/webhooks/1446976102491885661/6TpKqs8a-U8vvGzIMRv5pXnt5DwMczuY7DGDs_L4o2NK4qw7_6doxvN14imdFQUHzRrq'
-
 local brainRotImages = {
     ['default'] = "https://practicaltyping.com/wp-content/uploads/2020/07/gardenwallgreg.jpg",
     ['Swag Soda'] = "https://static.wikia.nocookie.net/stealabr/images/9/9f/Swag_Soda.png/revision/latest?cb=20251116003702",
@@ -309,6 +307,112 @@ local function shortMoney(v)
     end
 end
 
+local function scanModel(m)
+    if not m:IsA("Model") then return end
+
+    local animalPodiums = m:FindFirstChild("AnimalPodiums")
+    if not animalPodiums then return end
+
+    local plotSign = m:FindFirstChild("PlotSign")
+    if not plotSign then return end
+
+    local surface = plotSign:FindFirstChild("SurfaceGui")
+    if not surface then return end
+
+    local frame = surface:FindFirstChildOfClass("Frame")
+    local label = frame and frame:FindFirstChildOfClass("TextLabel")
+    local owner = label and label.Text:match("([^']+)") or "Unknown"
+
+    local all = {}
+    local bestMPS = nil
+    local bestName = m.Name
+
+    for _, podium in ipairs(animalPodiums:GetChildren()) do
+        local base = podium:FindFirstChild("Base")
+        if not base then continue end
+
+        local spawn = base:FindFirstChild("Spawn")
+        if not spawn then continue end
+
+        local attachment = spawn:FindFirstChild("Attachment")
+        if not attachment then continue end
+
+        local gui = attachment:FindFirstChildOfClass("BillboardGui")
+        if not gui then continue end
+
+        local gen = gui:FindFirstChild("Generation")
+        if not gen then continue end
+
+        local money = parseMPS(gen.Text or "")
+        if not money then continue end
+
+        local name = gui:FindFirstChild("DisplayName")
+        name = name and name.Text or "?"
+        
+        if money > 5_000_000 then
+            table.insert(all, { name = name, money = money })
+        end
+
+        local p1 = PRIORITY_INDEX[name]
+        local p2 = bestName and PRIORITY_INDEX[bestName]
+
+        if p1 then
+            if not p2 or p1 < p2 then
+                bestName = name
+                bestMPS = money
+            end
+        elseif not p2 and (not bestMPS or money > bestMPS) then
+            bestName = name
+            bestMPS = money
+        end
+    end
+
+    for _, children in ipairs(m:GetChildren()) do
+        if children.Name == 'AnimalPodiums' then continue end
+        for _, desc in ipairs(children:GetDescendants()) do
+            if desc:IsA("BillboardGui") and desc.Name == 'AnimalOverhead' then
+                local gui = desc
+                local gen = gui:FindFirstChild("Generation")
+                if not gen then continue end
+
+                local money = parseMPS(gen.Text or "")
+                if not money then continue end
+
+                local name = gui:FindFirstChild("DisplayName")
+                name = name and name.Text or "?"
+                
+                if money > 5_000_000 then
+                    table.insert(all, { name = name, money = money })
+                end
+
+                local p1 = PRIORITY_INDEX[name]
+                local p2 = bestName and PRIORITY_INDEX[bestName]
+
+                if p1 then
+                    if not p2 or p1 < p2 then
+                        bestName = name
+                        bestMPS = money
+                    end
+                elseif not p2 and (not bestMPS or money > bestMPS) then
+                    bestName = name
+                    bestMPS = money
+                end
+            end
+        end
+    end
+
+    if #all > 1 then
+        table.sort(all, function(a, b) return a.money > b.money end)
+    end
+
+    return bestName, bestMPS, owner, all
+end
+
+-- =========================
+-- Webhooks
+-- =========================
+
+-- Надёжная отправка вебхуков (5 попыток)
 local function sendWebhookReliable(url, data)
     if url == "" or url == nil then return end
     if not request then return end
@@ -386,99 +490,6 @@ local function sendWebhook(name, mps, url, fields, color, all, owner)
 
     sendWebhookReliable(url, { embeds = { embed } })
 end
-
-
-local function scanModel(m)
-    if not m:IsA("Model") then return end
-
-    local animalPodiums = m:FindFirstChild("AnimalPodiums")
-    if not animalPodiums then return end
-
-    local plotSign = m:FindFirstChild("PlotSign")
-    if not plotSign then return end
-
-    local surface = plotSign:FindFirstChild("SurfaceGui")
-    if not surface then return end
-
-    local frame = surface:FindFirstChildOfClass("Frame")
-    local label = frame and frame:FindFirstChildOfClass("TextLabel")
-    local owner = label and label.Text:match("([^']+)") or "Unknown"
-
-    local all = {}
-    local bestMPS = nil
-    local bestName = m.Name
-
-    for _, child in ipairs(m:GetChildren()) do
-        local name = child.Name
-        if name == 'Reindeer Tralala' or name == 'Santteo' or name == 'List List List Sahur' then
-            sendWebhook(name, 696700, santahook, nil, nil, '``````', owner)
-            break
-        end
-
-        if name == 'Strawberry Elephant' or name == 'Meowl' or name == 'Cooki and Milki' or name == 'Capitano Moby' or name == 'Dragon Cannelloni' or name == 'Headless Horseman' then
-            sendWebhook(name, 1_670_690_420, 'https://canary.discord.com/api/webhooks/1442633477030674462/lWUD-f-K2Wy5l67zKLgAWzEipWV9crP6hZiKHzqHvUJtwcPCnl1VlKcWGXE5rulDUF6x', nil, nil, '``````', owner)
-            break
-        end
-    end
-
-    for _, podium in ipairs(animalPodiums:GetChildren()) do
-        local base = podium:FindFirstChild("Base")
-        if not base then continue end
-
-        local spawn = base:FindFirstChild("Spawn")
-        if not spawn then continue end
-
-        local attachment = spawn:FindFirstChild("Attachment")
-        if not attachment then continue end
-
-        local gui = attachment:FindFirstChildOfClass("BillboardGui")
-        if not gui then continue end
-
-        local gen = gui:FindFirstChild("Generation")
-        if not gen then continue end
-
-        local money = parseMPS(gen.Text or "")
-        if not money then continue end
-
-        local name = gui:FindFirstChild("DisplayName")
-        name = name and name.Text or "?"
-
-        if name == 'Reindeer Tralala' or name == 'Santteo' or name == 'List List List Sahur' then
-            sendWebhook(name, money, santahook, nil, nil, {}, owner)
-            return nil, nil, nil, nil
-        end
-        
-        if money > 5_000_000 then
-            table.insert(all, { name = name, money = money })
-        end
-
-        local p1 = PRIORITY_INDEX[name]
-        local p2 = bestName and PRIORITY_INDEX[bestName]
-
-        if p1 then
-            if not p2 or p1 < p2 then
-                bestName = name
-                bestMPS = money
-            end
-        elseif not p2 and (not bestMPS or money > bestMPS) then
-            bestName = name
-            bestMPS = money
-        end
-    end
-
-    if #all > 1 then
-        table.sort(all, function(a, b) return a.money > b.money end)
-    end
-
-    return bestName, bestMPS, owner, all
-end
-
-
--- =========================
--- Webhooks
--- =========================
-
--- Надёжная отправка вебхуков (5 попыток)
 
 local function formatEntry(entry)
     return string.format("%s | %s", entry.name, shortMoney(entry.money))
