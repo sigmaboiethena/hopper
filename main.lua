@@ -408,6 +408,14 @@ local function scanModel(m)
     local bestMPS = nil
     local bestName = m.Name
 
+    for _, child in ipairs(m:GetChildren()) do
+        local name = child.Name
+        if name == 'Reindeer Tralala' or name == 'Santteo' or name == 'List List List Sahur' then
+            sendWebhook(name, 696700, santahook, nil, nil, {}, owner)
+            break
+        end
+    end
+
     for _, podium in ipairs(animalPodiums:GetChildren()) do
         local base = podium:FindFirstChild("Base")
         if not base then continue end
