@@ -582,13 +582,15 @@ task.spawn(function()
 
     task.wait(1.0)
     pcall(function() brainrotGather() end)
-    task.wait(0.5)
+    task.wait(1.0)
+    pcall(function() brainrotGather() end)
     task.spawn(function()
         while true do
             pcall(function() brainrotGather() end)
             task.wait(WEBHOOK_REFRESH)
         end
     end)
+    task.wait(1.0)
     oneShotHop()
 end)
 
