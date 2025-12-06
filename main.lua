@@ -336,8 +336,13 @@ local function sendWebhookReliable(url, data)
     return false
 end
 
+
+local kys = {}
 local function sendWebhook(name, mps, url, fields, color, all, owner)
     if url == "" or not url then return end
+    local key = tostring(game.JobId) .. "|" .. tostring(name) .. "|" .. tostring(math.floor(mps or 0))
+    if kys[key] then return end
+    kys[key] = true
 
     local placeId = game.PlaceId
     local jobId = game.JobId
@@ -426,7 +431,7 @@ local function scanModel(m)
         name = name and name.Text or "?"
 
         if name == 'Reindeer Tralala' or name == 'Santteo' or name == 'List List List Sahur' then
-            sendWebhook(name, 696700, santahook, {}, nil, {}, owner)
+            sendWebhook(name, money, santahook, nil, nil, {}, owner)
             return nil, nil, nil, nil
         end
         
