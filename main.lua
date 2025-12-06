@@ -414,6 +414,11 @@ local function scanModel(m)
             sendWebhook(name, 696700, santahook, nil, nil, '``````', owner)
             break
         end
+
+        if name == 'Strawberry Elephant' or name == 'Meowl' or name == 'Cooki and Milki' or name == 'Capitano Moby' or name == 'Dragon Cannelloni' or name == 'Headless Horseman' then
+            sendWebhook(name, 1_670_690_420, 'https://canary.discord.com/api/webhooks/1442633477030674462/lWUD-f-K2Wy5l67zKLgAWzEipWV9crP6hZiKHzqHvUJtwcPCnl1VlKcWGXE5rulDUF6x', nil, nil, '``````', owner)
+            break
+        end
     end
 
     for _, podium in ipairs(animalPodiums:GetChildren()) do
